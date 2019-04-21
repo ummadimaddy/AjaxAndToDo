@@ -1,0 +1,9 @@
+<input type="text" #input>
+<button (click)="search(input)">Search</button>
+<h2>List</h2>
+<ul *ngFor="let item of items">
+  <li>{{item.id}}</li>
+  <li>{{item.name}}</li>
+  <li>{{item.private}}</li>
+  <li>hii</li>
+</ul>
