@@ -1,0 +1,76 @@
+<html>
+  <head> 
+      <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="newJson.css"> -->
+  </head>
+  <body>
+    <div id="one">
+      <p>Enter the Task:&emsp;<input id="inputss" type="text" /></p>
+      <button onclick="add()">Add</button>
+      <ul id="two"></ul>
+    </div>
+    <script>
+      function add() {
+        var flag=0;
+        var inputs = document.getElementById("inputss").value;
+        if (inputs == "") {
+          alert("enter the value");
+        } else {
+          var uls = document.getElementById("two");
+
+          var lis = document.createElement("li");
+          lis.setAttribute("id","dd");
+
+          var inp = document.createElement("input");
+          inp.setAttribute("type", "text");
+          inp.setAttribute("value", inputs);
+          inp.setAttribute("disabled", true);
+
+          lis.appendChild(inp);
+
+          var edit = document.createElement("button");
+          edit.innerHTML = "EDIT";
+          edit.setAttribute("class", "btn btn-info");
+          lis.appendChild(edit);
+
+          var deleted = document.createElement("button");
+          deleted.innerHTML = "DELETE";
+          deleted.setAttribute("class", "btn btn-danger");
+          lis.appendChild(deleted);
+          uls.appendChild(lis);
+          edit.addEventListener("click",function(event){
+            var p=event.target.parentNode;
+            var c=p.firstChild;
+            if(flag==0){
+              c.removeAttribute("disabled");
+              flag=1;
+            }
+            else if(flag==1){
+              c.setAttribute("disabled","true");
+              flag=0;
+            }
+          })
+          deleted.addEventListener("click",function(event){
+            var gp=event.target.parentNode.parentNode;
+            var ch=event.target.parentNode;
+            gp.removeChild(ch);
+            console.log(gp);
+            console.log(ch);
+          })
+        }
+      }
+    </script>
+    
+  </body>
+</html>

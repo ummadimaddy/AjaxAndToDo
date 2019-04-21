@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+      
+      <input type="text" id="inputss">
+      <button onclick="search()">Search</button>
+        <span><button type="button" onclick="getall()">Add</button><button type="button" onclick="deletall()">DELETE</button></span>
+
+
+        <div class="row">
+            <div  id="id01">
+    
+            </div>
+        </div>
+        <script>
+            var sum;
+            function search(){
+                var inputs = document.getElementById("inputss").value;
+                if(inputs==''){
+                    alert('enter the value')
+                }
+                else{
+                    var address="https://api.github.com/search/repositories?q="
+                    sum=address+inputs
+                    console.log(inputs);
+                    console.log(address);
+                    console.log(sum);
+                }
+            }
+            function getall() {
+                var xmlhttp = new XMLHttpRequest();
+                console.log(sum);
+                // var sum;
+                // var address = "https://jsonplaceholder.typicode.com/posts";
+                // var address="https://api.github.com/search/repositories?q="+"inputs"
+                // console.log(address);
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var myArr = JSON.parse(this.responseText);
+                        myFunction(myArr);
+                        console.log("hii");
+                    }
+                };
+                xmlhttp.open("GET", sum, true);
+                xmlhttp.send();
+    
+                function myFunction(arr) {
+                    var i;
+                    for (i = 0; i < arr.items.length; i++)
+                    {
+                        
+                        document.getElementById("id01").innerHTML += "User Id: "+ arr.items[i].id+"<br>";           
+                        document.getElementById("id01").innerHTML += "Name:      "+arr.items[i].name+"<br>";           
+                        document.getElementById("id01").innerHTML += "Private:   "+arr.items[i].private+"<br>";  
+                        console.log("one");         
+                        // document.getElementById("id01").innerHTML += "body:    "+ arr[i].body+"<br><br><br>";                    
+                    }
+                }
+            }
+            function deletall()
+            {
+                document.getElementById("id01").innerHTML = " ";
+                console.log("two");
+            }
+        </script>
+
+    </body>
+</html>
